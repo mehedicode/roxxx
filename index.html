@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#0F2747" />
+  <meta name="description" content="Aurelian — premium everyday products, digital books, watches, chocolates and more." />
+  <title>Aurelian — Premium Everyday Products</title>
+
+  <!-- Tailwind CSS: all styling is written with Tailwind classes in this HTML file -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: "#0F2747",
+            brand: "#155EEF",
+            gold: "#D4A84F",
+            ink: "#172033",
+            muted: "#667085",
+            line: "#E8EBF0",
+            discount: "#D92D20",
+            surface: "#F8FAFC"
+          },
+          boxShadow: {
+            soft: "0 8px 30px rgba(15,39,71,.07)",
+            lift: "0 14px 40px rgba(15,39,71,.10)"
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body { font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .hide-scrollbar::-webkit-scrollbar { display:none; }
+    .hide-scrollbar { scrollbar-width:none; }
+    .no-scroll { overflow:hidden; }
+  </style>
+</head>
+
+<body class="bg-white text-ink antialiased">
+  <!-- HEADER -->
+  <header id="siteHeader" class="sticky top-0 z-40 border-b border-line bg-white/95 backdrop-blur">
+    <div class="mx-auto flex h-[70px] max-w-7xl items-center gap-4 px-4 sm:px-6 lg:px-8">
+      <button id="mobileMenuBtn" class="inline-flex h-11 w-11 items-center justify-center rounded-md border border-line text-navy lg:hidden" aria-label="Open menu">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+
+      <button id="logoBtn" class="shrink-0 text-left" aria-label="Go home">
+        <span class="text-xl font-bold tracking-tight text-navy sm:text-2xl">Aurelian</span>
+        <span class="mt-1 block h-[2px] w-12 bg-gold"></span>
+      </button>
+
+      <nav class="ml-8 hidden items-center gap-7 lg:flex">
+        <button data-nav="home" class="nav-link text-sm font-medium text-navy">Home</button>
+        <button data-nav="shop" class="nav-link text-sm font-medium text-muted hover:text-navy">Shop</button>
+        <button data-nav="digital" class="nav-link text-sm font-medium text-muted hover:text-navy">Digital</button>
+        <button data-nav="physical" class="nav-link text-sm font-medium text-muted hover:text-navy">Physical</button>
+      </nav>
+
+      <div class="ml-auto flex items-center gap-2">
+        <div class="hidden items-center rounded-md border border-line bg-white px-3 lg:flex">
+          <svg class="h-4 w-4 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+          <input id="desktopSearch" class="w-52 border-0 bg-transparent px-2 py-2 text-sm outline-none placeholder:text-muted" placeholder="Search products" />
+        </div>
+
+        <button id="mobileSearchBtn" class="inline-flex h-11 w-11 items-center justify-center rounded-md text-navy lg:hidden" aria-label="Search">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+        </button>
+
+        <button id="cartBtn" class="relative inline-flex h-11 w-11 items-center justify-center rounded-md text-navy hover:bg-surface" aria-label="Open cart">
+          <svg class="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 4h2l2.1 10.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6"/><circle cx="9" cy="20" r="1.2"/><circle cx="18" cy="20" r="1.2"/></svg>
+          <span id="cartCount" class="absolute right-0.5 top-0.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-navy px-1 text-[11px] font-bold text-white">0</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobileSearchWrap" class="hidden border-t border-line bg-white px-4 py-3 lg:hidden">
+      <div class="flex items-center rounded-md border border-line px-3">
+        <svg class="h-4 w-4 text-navy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+        <input id="mobileSearch" class="w-full border-0 bg-transparent px-2 py-2.5 text-sm outline-none" placeholder="Search products" />
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="hidden border-t border-line bg-white lg:hidden">
+      <div class="mx-auto max-w-7xl px-4 py-3">
+        <div class="grid gap-1">
+          <button data-nav="home" class="mobile-nav rounded-md px-3 py-3 text-left text-sm font-semibold">Home</button>
+          <button data-nav="shop" class="mobile-nav rounded-md px-3 py-3 text-left text-sm font-semibold">Shop</button>
+          <button data-nav="digital" class="mobile-nav rounded-md px-3 py-3 text-left text-sm font-semibold">Digital</button>
+          <button data-nav="physical" class="mobile-nav rounded-md px-3 py-3 text-left text-sm font-semibold">Physical</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section id="hero" class="bg-surface">
+      <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 sm:py-16 lg:grid-cols-2 lg:px-8 lg:py-20">
+        <div>
+          <p class="mb-4 text-xs font-bold uppercase tracking-[0.18em] text-brand">Curated everyday essentials</p>
+          <h1 class="max-w-xl text-4xl font-bold leading-[1.05] tracking-tight text-navy sm:text-5xl lg:text-6xl">
+            Products worth having.
+          </h1>
+          <p class="mt-5 max-w-xl text-base leading-7 text-muted sm:text-lg">
+            Watches, books, chocolates and everyday essentials — selected for quality and priced with you in mind.
+          </p>
+          <div class="mt-7 flex flex-wrap gap-3">
+            <button id="heroShopBtn" class="rounded-md bg-brand px-6 py-3.5 text-sm font-bold text-white shadow-sm transition hover:-translate-y-0.5 hover:bg-blue-700 active:translate-y-0">
+              Shop Now
+            </button>
+            <button id="heroDigitalBtn" class="rounded-md border border-line bg-white px-6 py-3.5 text-sm font-bold text-navy transition hover:border-gold hover:bg-white">
+              Explore Digital
+            </button>
+          </div>
+          <div class="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-xs font-medium text-muted">
+            <span>✓ Secure checkout</span>
+            <span>✓ Quality-focused</span>
+            <span>✓ Fast delivery</span>
+          </div>
+        </div>
+
+        <div class="relative overflow-hidden rounded-lg border border-line bg-white shadow-soft">
+          <img
+            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=85"
+            alt="Premium watch"
+            class="h-[330px] w-full object-cover sm:h-[420px]"
+            loading="eager"
+          />
+          <div class="absolute bottom-4 left-4 rounded-md border border-white/70 bg-white/95 px-4 py-3 shadow-soft">
+            <p class="text-[11px] font-bold uppercase tracking-wider text-muted">Featured</p>
+            <p class="mt-0.5 text-sm font-bold text-navy">Premium timepieces</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STORE CONTENT -->
+    <section id="shopSection" class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <div id="resultsHeading" class="mb-7 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p id="resultsEyebrow" class="text-xs font-bold uppercase tracking-[0.16em] text-brand">Curated for you</p>
+          <h2 id="resultsTitle" class="mt-1 text-2xl font-bold tracking-tight text-navy sm:text-3xl">Featured Products</h2>
+        </div>
+        <div class="flex items-center gap-2">
+          <select id="sortSelect" class="rounded-md border border-line bg-white px-3 py-2 text-sm font-medium text-navy outline-none focus:border-brand">
+            <option value="featured">Featured</option>
+            <option value="priceLow">Price: Low to High</option>
+            <option value="priceHigh">Price: High to Low</option>
+            <option value="discount">Biggest Discount</option>
+          </select>
+          <button id="clearFilterBtn" class="hidden rounded-md px-3 py-2 text-sm font-semibold text-brand hover:bg-surface">Clear</button>
+        </div>
+      </div>
+      <div id="productGrid" class="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4"></div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section id="categoriesSection" class="border-y border-line bg-surface">
+      <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div class="mb-7">
+          <p class="text-xs font-bold uppercase tracking-[0.16em] text-brand">Browse</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight text-navy sm:text-3xl">Shop by category</h2>
+        </div>
+        <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
+          <button data-category="Digital Books" class="category-card group rounded-md border border-line border-l-[3px] border-l-gold bg-white p-5 text-left transition hover:-translate-y-0.5 hover:shadow-soft">
+            <span class="text-sm font-bold text-navy">Digital Books</span>
+            <span class="mt-1 block text-xs leading-5 text-muted">Read instantly</span>
+          </button>
+          <button data-category="Watches" class="category-card group rounded-md border border-line border-l-[3px] border-l-gold bg-white p-5 text-left transition hover:-translate-y-0.5 hover:shadow-soft">
+            <span class="text-sm font-bold text-navy">Watches</span>
+            <span class="mt-1 block text-xs leading-5 text-muted">Watches & clocks</span>
+          </button>
+          <button data-category="Chocolates" class="category-card group rounded-md border border-line border-l-[3px] border-l-gold bg-white p-5 text-left transition hover:-translate-y-0.5 hover:shadow-soft">
+            <span class="text-sm font-bold text-navy">Chocolates</span>
+            <span class="mt-1 block text-xs leading-5 text-muted">Gift boxes & bars</span>
+          </button>
+          <button data-category="Lifestyle" class="category-card group rounded-md border border-line border-l-[3px] border-l-gold bg-white p-5 text-left transition hover:-translate-y-0.5 hover:shadow-soft">
+            <span class="text-sm font-bold text-navy">Lifestyle</span>
+            <span class="mt-1 block text-xs leading-5 text-muted">Everyday essentials</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BEST SELLERS -->
+    <section id="bestSection" class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <div class="mb-7 flex items-end justify-between gap-4">
+        <div>
+          <p class="text-xs font-bold uppercase tracking-[0.16em] text-brand">Popular now</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight text-navy sm:text-3xl">Best Sellers</h2>
+        </div>
+        <button id="bestViewBtn" class="hidden text-sm font-bold text-brand hover:underline sm:block">View all</button>
+      </div>
+      <div id="bestGrid" class="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4"></div>
+    </section>
+
+    <!-- DIGITAL -->
+    <section id="digitalSection" class="bg-navy text-white">
+      <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div class="mb-7 max-w-2xl">
+          <p class="text-xs font-bold uppercase tracking-[0.16em] text-gold">Instant access</p>
+          <h2 class="mt-1 text-2xl font-bold tracking-tight sm:text-3xl">Knowledge, delivered instantly.</h2>
+          <p class="mt-2 text-sm leading-6 text-white/70">Digital books and practical reads, available right after a successful purchase.</p>
+        </div>
+        <div id="digitalGrid" class="grid grid-cols-2 gap-3 sm:gap-5 md:grid-cols-3 lg:grid-cols-4"></div>
+      </div>
+    </section>
+
+    <!-- TRUST -->
+    <section class="border-b border-line bg-white">
+      <div class="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-4 py-12 sm:px-6 md:grid-cols-4 lg:px-8">
+        <div>
+          <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-full border border-gold text-sm text-navy">✓</div>
+          <h3 class="text-sm font-bold text-navy">Secure Payment</h3>
+          <p class="mt-1 text-xs leading-5 text-muted">Pay with trusted methods built for local shoppers.</p>
+        </div>
+        <div>
+          <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-full border border-gold text-sm text-navy">★</div>
+          <h3 class="text-sm font-bold text-navy">Quality Products</h3>
+          <p class="mt-1 text-xs leading-5 text-muted">Every item is selected with quality in mind.</p>
+        </div>
+        <div>
+          <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-full border border-gold text-sm text-navy">→</div>
+          <h3 class="text-sm font-bold text-navy">Fast Delivery</h3>
+          <p class="mt-1 text-xs leading-5 text-muted">Physical orders are prepared quickly.</p>
+        </div>
+        <div>
+          <div class="mb-3 flex h-9 w-9 items-center justify-center rounded-full border border-gold text-sm text-navy">?</div>
+          <h3 class="text-sm font-bold text-navy">Customer Support</h3>
+          <p class="mt-1 text-xs leading-5 text-muted">Need help? We are here to assist.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-surface">
+    <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-3 lg:px-8">
+      <div>
+        <span class="text-xl font-bold text-navy">Aurelian</span>
+        <span class="mt-1 block h-[2px] w-12 bg-gold"></span>
+        <p class="mt-4 max-w-sm text-sm leading-6 text-muted">A clean collection of useful products, thoughtful gifts and digital reads.</p>
+      </div>
+      <div>
+        <h3 class="text-sm font-bold text-navy">Shop</h3>
+        <div class="mt-4 grid gap-2 text-sm text-muted">
+          <button data-nav="shop" class="text-left hover:text-navy">All Products</button>
+          <button data-nav="digital" class="text-left hover:text-navy">Digital Books</button>
+          <button data-nav="physical" class="text-left hover:text-navy">Physical Products</button>
+        </div>
+      </div>
+      <div>
+        <h3 class="text-sm font-bold text-navy">Support</h3>
+        <div class="mt-4 grid gap-2 text-sm text-muted">
+          <span>support@example.com</span>
+          <span>+880 1XXX-XXXXXX</span>
+          <span>Bangladesh</span>
+        </div>
+      </div>
+    </div>
+    <div class="border-t border-line">
+      <div class="mx-auto max-w-7xl px-4 py-5 text-xs text-muted sm:px-6 lg:px-8">
+        © 2026 Aurelian. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <!-- PRODUCT MODAL -->
+  <div id="productModal" class="fixed inset-0 z-50 hidden items-end justify-center bg-navy/50 p-0 sm:items-center sm:p-5">
+    <div class="max-h-[92vh] w-full max-w-3xl overflow-auto rounded-t-xl bg-white shadow-lift sm:rounded-lg">
+      <div class="sticky top-0 z-10 flex items-center justify-between border-b border-line bg-white px-4 py-3 sm:px-6">
+        <span class="text-sm font-bold text-navy">Product details</span>
+        <button data-close-modal class="flex h-10 w-10 items-center justify-center rounded-md text-muted hover:bg-surface" aria-label="Close">
+          <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m6 6 12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+      <div id="productModalBody" class="grid gap-6 p-4 sm:p-6 md:grid-cols-2"></div>
+    </div>
+  </div>
+
+  <!-- CART DRAWER -->
+  <div id="cartOverlay" class="fixed inset-0 z-50 hidden bg-navy/50"></div>
+  <aside id="cartDrawer" class="fixed right-0 top-0 z-[60] flex h-full w-full max-w-md translate-x-full flex-col bg-white shadow-lift transition-transform duration-300">
+    <div class="flex items-center justify-between border-b border-line px-5 py-4">
+      <div>
+        <p class="text-xs font-bold uppercase tracking-wider text-brand">Your selection</p>
+        <h2 class="mt-0.5 text-lg font-bold text-navy">Shopping Cart</h2>
+      </div>
+      <button id="closeCartBtn" class="flex h-10 w-10 items-center justify-center rounded-md text-muted hover:bg-surface" aria-label="Close cart">
+        <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m6 6 12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div id="cartItems" class="hide-scrollbar flex-1 overflow-y-auto p-5"></div>
+    <div class="border-t border-line p-5">
+      <div class="flex items-center justify-between">
+        <span class="text-sm text-muted">Subtotal</span>
+        <strong id="cartSubtotal" class="text-lg text-navy">৳0</strong>
+      </div>
+      <button id="checkoutBtn" class="mt-4 w-full rounded-md bg-brand px-5 py-3.5 text-sm font-bold text-white transition hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-gray-300" disabled>
+        Proceed to Checkout
+      </button>
+      <p class="mt-2 text-center text-xs text-muted">Demo frontend — payment is not connected.</p>
+    </div>
+  </aside>
+
+  <!-- CHECKOUT MODAL -->
+  <div id="checkoutModal" class="fixed inset-0 z-[70] hidden items-end justify-center bg-navy/50 p-0 sm:items-center sm:p-5">
+    <div class="max-h-[94vh] w-full max-w-lg overflow-auto rounded-t-xl bg-white shadow-lift sm:rounded-lg">
+      <div class="sticky top-0 z-10 border-b border-line bg-white">
+        <div class="flex items-center justify-between px-5 py-4">
+          <div>
+            <p class="text-xs font-bold uppercase tracking-wider text-brand">Secure checkout</p>
+            <h2 id="checkoutTitle" class="mt-0.5 text-lg font-bold text-navy">Review your order</h2>
+          </div>
+          <button id="closeCheckoutBtn" class="flex h-10 w-10 items-center justify-center rounded-md text-muted hover:bg-surface" aria-label="Close checkout">
+            <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m6 6 12 12M18 6 6 18"/></svg>
+          </button>
+        </div>
+
+        <div id="checkoutSteps" class="flex gap-1 px-5 pb-4">
+          <div data-step="1" class="flex flex-1 items-center gap-2 text-xs font-bold text-brand">
+            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-brand text-white">1</span>
+            <span id="stepLabel1">Product</span>
+          </div>
+          <div data-step="2" class="flex flex-1 items-center gap-2 text-xs font-bold text-muted">
+            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line">2</span>
+            <span id="stepLabel2">Delivery</span>
+          </div>
+          <div data-step="3" class="flex flex-1 items-center gap-2 text-xs font-bold text-muted">
+            <span class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-line">3</span>
+            <span id="stepLabel3">Complete</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-5">
+        <section id="checkoutStep1">
+          <div id="checkoutProductSummary"></div>
+          <button id="checkoutNextFromProduct" class="mt-5 w-full min-h-11 rounded-md bg-brand px-5 py-3.5 text-sm font-bold text-white hover:bg-blue-700">Next</button>
+        </section>
+
+        <section id="checkoutStep2" class="hidden">
+          <div class="mb-5 rounded-md border border-line bg-surface p-4">
+            <div class="flex items-center justify-between text-sm">
+              <span class="text-muted">Order total</span>
+              <strong id="deliveryTotal" class="text-navy">৳0</strong>
+            </div>
+          </div>
+
+          <form id="deliveryForm" class="grid gap-4" novalidate>
+            <div>
+              <label for="deliveryName" class="text-sm font-semibold text-navy">Full Name</label>
+              <input id="deliveryName" name="name" required autocomplete="name" class="mt-1.5 min-h-11 w-full rounded-md border border-line px-3 py-3 text-sm outline-none focus:border-brand" placeholder="Your full name" />
+            </div>
+
+            <div>
+              <label for="deliveryPhone" class="text-sm font-semibold text-navy">Call Number</label>
+              <input id="deliveryPhone" name="phone" required inputmode="numeric" maxlength="11" pattern="[0-9]{11}" class="mt-1.5 min-h-11 w-full rounded-md border border-line px-3 py-3 text-sm outline-none focus:border-brand" placeholder="01712345678" />
+              <p class="mt-1.5 text-xs text-muted">Exactly 11 digits. No +880, spaces or hyphens.</p>
+              <p id="phoneError" class="mt-1 hidden text-xs font-semibold text-discount">Enter a valid 11-digit Bangladesh mobile number.</p>
+            </div>
+
+            <div>
+              <label for="deliveryDistrict" class="text-sm font-semibold text-navy">District</label>
+              <select id="deliveryDistrict" name="district" required class="mt-1.5 min-h-11 w-full rounded-md border border-line bg-white px-3 py-3 text-sm outline-none focus:border-brand">
+                <option value="">Select district</option>
+                <option>Dhaka</option><option>Chattogram</option><option>Rajshahi</option><option>Khulna</option>
+                <option>Barishal</option><option>Sylhet</option><option>Rangpur</option><option>Mymensingh</option>
+                <option>Comilla</option><option>Narayanganj</option><option>Gazipur</option><option>Other</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="deliveryThana" class="text-sm font-semibold text-navy">Thana</label>
+              <input id="deliveryThana" name="thana" required class="mt-1.5 min-h-11 w-full rounded-md border border-line px-3 py-3 text-sm outline-none focus:border-brand" placeholder="Enter thana" />
+            </div>
+
+            <div>
+              <label for="deliveryArea" class="text-sm font-semibold text-navy">Receive Area Address</label>
+              <textarea id="deliveryArea" name="areaAddress" required rows="4" class="mt-1.5 w-full resize-none rounded-md border border-line px-3 py-3 text-sm outline-none focus:border-brand" placeholder="House, road, area, landmark etc."></textarea>
+            </div>
+
+            <p id="deliveryError" class="hidden rounded-md bg-red-50 px-3 py-2 text-xs font-semibold text-discount"></p>
+
+            <div class="grid grid-cols-2 gap-2 pt-1">
+              <button id="backToProduct" type="button" class="min-h-11 rounded-md border border-line px-4 text-sm font-bold text-navy hover:bg-surface">Back</button>
+              <button type="submit" class="min-h-11 rounded-md bg-brand px-4 text-sm font-bold text-white hover:bg-blue-700">Next</button>
+            </div>
+          </form>
+        </section>
+
+        <section id="checkoutStep3" class="hidden">
+          <div id="checkoutStep3Body"></div>
+        </section>
+
+        <section id="checkoutSuccess" class="hidden">
+          <div class="py-8 text-center">
+            <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-green-50 text-2xl text-green-600">✓</div>
+            <h2 id="successTitle" class="mt-5 text-2xl font-bold text-navy">Order confirmed</h2>
+            <p id="successMessage" class="mx-auto mt-2 max-w-sm text-sm leading-6 text-muted"></p>
+            <div id="successSummary" class="mx-auto mt-5 max-w-sm rounded-md border border-line bg-surface p-4 text-left text-sm"></div>
+            <button id="closeSuccessBtn" class="mt-5 rounded-md bg-brand px-6 py-3.5 text-sm font-bold text-white hover:bg-blue-700">Continue Shopping</button>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div id="toast" class="pointer-events-none fixed bottom-5 left-1/2 z-[90] -translate-x-1/2 translate-y-5 rounded-md bg-navy px-4 py-3 text-sm font-semibold text-white opacity-0 shadow-lift transition-all duration-200"></div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
